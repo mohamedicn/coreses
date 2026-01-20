@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>SoulBloom</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Bootstrap RTL -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+
+    <!-- Animate.css -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/> -->
+
+    <style>
+        :root {
+            --purple: #5d1d6d;
+            --mint: #7eb5b2;
+            --pink: #c98bdc;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Cairo", sans-serif;
+        }
+
+        body {
+            background: var(--purple);
+            color: var(--white);
+        }
+
+        /* Navbar */
+        .navbar {
+            padding: 20px 0;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+        }
+
+        .btn.outline {
+            background: transparent;
+            border: 1px solid var(--white);
+            color: var(--white);
+        }
+
+        .btn.filled {
+            background: var(--pink);
+            color: var(--purple);
+            border: none;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .logo {
+               width: 250px;
+            margin-top: 20px;
+        }
+
+        .hero-text {
+            max-width: 500px;
+            margin: auto;
+            line-height: 1.9;
+            font-size: 16px;
+                text-align: justify;
+        }
+
+        .btn.shop {
+            margin-top: 25px;
+            background: transparent;
+            border: 1px solid var(--white);
+            color: var(--white);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: var(--mint);
+            padding: 70px 0;
+            color: var(--purple);
+            text-align: center;
+        }
+
+        .card {
+            padding: 25px;
+            border-radius: 10px;
+            border: none;
+            height: 100%;
+            color: var(--purple);;
+        }
+
+        .card span {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        .card p{
+            padding: 35px 20px 25px 20px;
+                text-align: left;
+        }
+
+        /* About */
+        .about {
+            padding: 80px 0;
+        }
+
+      
+
+        /* Footer */
+        .footer {
+            background: #4b165e;
+            padding: 35px 0;
+            text-align: center;
+        }
+
+        .footer p {
+            margin: 0;
+            font-size: 14px;
+            color: #ddd;
+        }
+
+
+.footer-link {
+    color: #555;
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+.footer-link:hover {
+    color: #7b5cff;
+}
+
+.separator {
+    color: #ccc;
+}
+
+.social-icon {
+    color: #555;
+    margin: 0 6px;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.social-icon:hover {
+    color: #7b5cff;
+}
+
+.footer hr {
+    margin: 15px 0;
+    opacity: 0.1;
+}
+
+
+        /* Scroll Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .hero-text {
+                font-size: 14px;
+            }
+        }
+         /* Navbar */
+        .navbar {
+            padding: 20px 0;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+        }
+
+        .btn.outline {
+            background: transparent;
+            border: 1px solid var(--white);
+            color: var(--white);
+        }
+
+        .btn.filled {
+            background: var(--pink);
+            color: var(--purple);
+            border: none;
+        }
+        .btnt{
+               background: #c98bdc;
+    border: none;
+    border-radius: 25px;
+    font-size: 15px;
+    color: white;
+    padding: 4px 13px;
+        }
+         p{
+                font-family: serif;
+    line-height: 30px;
+        }
+
+        .courses {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .course {
+      background: #000;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      height: 400px;
+    }
+    .course img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.85;
+    }
+    .course-content {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+    }
+    .course-content h3 {
+      margin: 0;
+      font-size: 20px;
+    }
+    .price {
+      margin-top: 10px;
+      display: inline-block;
+      background: #000;
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 14px;
+    }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="container d-flex justify-content-between align-items-center">
+
+        <!-- Logo -->
+         <a href="index.html" style="    color: white;text-decoration: none;">
+             <h5 class="mb-0 d-flex align-items-center gap-2">
+                 SoulBloom
+                 <img src="./logo-removebg-preview.png" height="30" alt="">
+             </h5>
+         </a>
+
+        <!-- User Dropdown -->
+        <div class="dropdown">
+           <div class="d-flex justify-content-end gap-2">
+                <a style="text-decoration: none;" href="login.html" class="btnt outline">تسجيل الدخول</a>
+                <a style="text-decoration: none;" href="reqster.html" class="btnt filled">مستخدم جديد</a>
+            </div>
+        </div>
+
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 ">
+                <p class="hero-text">
+                    مساحة آمنة للشفاء والتطور الروحي<br>
+                    هنا تبدأ رحلتك إلى الداخل حيث تصغي لروحك
+                    وتحتضن ذاتك الحقيقية وتمنحها المساحة لتزهر.
+                    هنا تبدأ رحلتك إلى الداخل حيث تصغي لروحك
+                    وتحتضن ذاتك الحقيقية وتمنحها المساحة لتزهر.
+                    هنا تبدأ رحلتك إلى الداخل حيث تصغي لروحك
+                    وتحتضن ذاتك الحقيقية وتمنحها المساحة لتزهر.
+                    هنا تبدأ رحلتك إلى الداخل حيث تصغي لروحك
+                    وتحتضن ذاتك الحقيقية وتمنحها المساحة لتزهر.
+                    هنا تبدأ رحلتك إلى الداخل حيث تصغي لروحك
+                    وتحتضن ذاتك الحقيقية وتمنحها المساحة لتزهر.
+                </p>
+            </div>
+            
+            <div class="col-lg-6 ">
+                <img src="logo-removebg-preview.png" alt="SoulBloom" class="logo">
+            </div>
+            <a href="coursed.html" style="    width: 150px;
+    border-radius: 10px;
+    margin: 0 auto;
+    margin-top: 30px;" class="btn shop">→ SHOP NOW </a>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials">
+    <div class="container">
+        
+        <h2 class="mb-5">تجارب المشاركين</h2>
+
+        <div class="row g-4">
+            <div class="col-md-4 ">
+                <div class="card">
+                    <p>Boost your product credibility by adding testimonials.
+                        People love recommendations from others.
+                        People love recommendations from others.
+                        People love recommendations from others.
+                    </p>
+                    <span>Ellen Downing</span>
+                </div>
+            </div>
+
+            <div class="col-md-4 ">
+                <div class="card">
+                    <p>Feedback from others who've tried it is invaluable.
+                        People love recommendations from others.
+                        People love recommendations from others.
+                        People love recommendations from others.
+                    </p>
+                    <span>Gustav Shaffer</span>
+                </div>
+            </div>
+
+            <div class="col-md-4 ">
+                <div class="card">
+                    <p>People love recommendations from others.
+                        People love recommendations from others.
+                        People love recommendations from others.
+                        People love recommendations from others.
+                    </p>
+                    <span>Thomas Larson</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About -->
+<section class="about" style="    padding: 0;">
+    <div class="container" style="    margin-left: 0;" >
+        <div class="row align-items-center">
+            <div class="col-lg-6 ">
+                <h3>مرحباً بك ...</h3>
+                <p>
+                    أنا مريم، مدربة ومعالجة متخصصة في الشفاء
+                    والتطور الذاتي، أؤمن أن داخل كل إنسان
+                    نورًا ينتظر أن ينكشف، وأن العودة إلى الذات
+                    هي أعظم رحلة يمكن أن نخوضها.
+                    أنا مريم، مدربة ومعالجة متخصصة في الشفاء
+                    والتطور الذاتي، أؤمن أن داخل كل إنسان
+                    نورًا ينتظر أن ينكشف، وأن العودة إلى الذات
+                    هي أعظم رحلة يمكن أن نخوضها.
+                    أنا مريم، مدربة ومعالجة متخصصة في الشفاء
+                    والتطور الذاتي، أؤمن أن داخل كل إنسان
+                    نورًا ينتظر أن ينكشف، وأن العودة إلى الذات
+                    هي أعظم رحلة يمكن أن نخوضها.
+                    أنا مريم، مدربة ومعالجة متخصصة في الشفاء
+                    والتطور الذاتي، أؤمن أن داخل كل إنسان
+                    نورًا ينتظر أن ينكشف، وأن العودة إلى الذات
+                    هي أعظم رحلة يمكن أن نخوضها.
+                </p>
+            </div>
+
+            <div class="col-lg-6 " style="       padding-left: 0;
+    display: flex;
+    justify-content: end;
+    height: 600px;
+">
+                <img src="download.jpg" alt="Mariam" style="    border-radius: 0;">
+            </div>
+        </div>
+    </div>
+</section>
+
+    <div class="container">
+        <h1 style="    text-align: center;
+    font-size: 33px;
+    font-weight: 100;
+    padding-top: 30px;
+    padding-bottom: 30px;">الدورات الأكثر مبيعا </h1>
+
+        <div class="courses">
+            <a href="courses_details.html" style="color: #ddd;" class="course">
+                <img style="    object-fit: inherit;" src="download (1).jpg" alt="Basic Cleaning">
+                <div class="course-content">
+                <h3>Basic Cleaning</h3>
+                <span class="price">$30</span>
+                </div>
+            </a>
+
+            <a href="courses_details.html" style="color: #ddd;" class="course">
+                <img style="    object-fit: inherit;" src="download (1).jpg" alt="Mandelic Acid Peel">
+                <div class="course-content">
+                <h3>Mandelic Acid Peel</h3>
+                <span class="price">$50</span>
+                </div>
+            </a>
+
+            <a href="courses_details.html" style="color: #ddd;" class="course">
+                <img style="    object-fit: inherit;" src="download (1).jpg" alt="Glycolic Acid Peel">
+                <div class="course-content">
+                <h3>Glycolic Acid Peel</h3>
+                <span class="price">$50</span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row align-items-center text-center text-md-start">
+
+            <!-- Right side: Pages -->
+            <div class="col-md-6 mb-3 mb-md-0 text-md-end">
+                <a href="about.html" class="footer-link">نبذة عنا</a>
+                <span class="separator">|</span>
+                <a href="faz.html" class="footer-link">الشروط والأحكام</a>
+                <span class="separator">|</span>
+                <a href="sas.html" class="footer-link">سياسة الخصوصية</a>
+            </div>
+
+            <!-- Left side: Social media -->
+            <div class="col-md-6 text-md-start">
+                <span class="me-2">تابعنا على</span>
+
+                <a href="#" class="social-icon facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="social-icon instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="social-icon whatsapp"><i class="bi bi-whatsapp"></i></a>
+                <a href="#" class="social-icon telegram"><i class="bi bi-telegram"></i></a>
+                <a href="#" class="social-icon youtube"><i class="bi bi-youtube"></i></a>
+                <a href="#" class="social-icon tiktok"><i class="bi bi-tiktok"></i></a>
+                <a href="#" class="social-icon snapchat"><i class="bi bi-snapchat"></i></a>
+            </div>
+        </div>
+
+        <hr>
+
+        <p class="text-center mb-0">
+            © 2026 SoulBloom with Mariam — All Rights Reserved
+        </p>
+    </div>
+</footer>
+
+
+<!-- Scroll Animation Script -->
+<!-- <script>
+    window.addEventListener("scroll", () => {
+        document.querySelectorAll(".reveal").forEach(el => {
+            const position = el.getBoundingClientRect().top;
+            if (position < window.innerHeight - 100) {
+                el.classList.add("active");
+            }
+        });
+    });
+</script> -->
+
+</body>
+</html>

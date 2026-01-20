@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>Login | SoulBloom</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap RTL -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --purple: #5d1d6d;
+            --pink: #c98bdc;
+            --dark: #2b0f33;
+        }
+
+        body {
+            font-family: "Cairo", sans-serif;
+            background: var(--purple);
+            color: #fff;
+        }
+
+        .login-card {
+            background: rgba(255,255,255,0.08);
+            border-radius: 18px;
+            padding: 35px;
+            max-width: 420px;
+            margin: auto;
+        }
+
+        .form-control {
+            background: rgba(255,255,255,0.15);
+            border: none;
+            color: #fff;
+            border-radius: 12px;
+        }
+
+        .form-control:focus {
+            background: rgba(255,255,255,0.2);
+            color: #fff;
+            box-shadow: none;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #4b165e;
+            padding: 35px 0;
+            text-align: center;
+        }
+
+        .footer p {
+            margin: 0;
+            font-size: 14px;
+            color: #ddd;
+        }
+
+
+        .btn-login {
+            background: linear-gradient(90deg, #c98bdc, #c98bdc);
+            border: none;
+            color: #2b0f33;
+            font-weight: bold;
+            border-radius: 12px;
+        }
+
+        .login-links a {
+            color: #c98bdc;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .login-links a:hover {
+            text-decoration: underline;
+        }
+            /* Navbar */
+        .navbar {
+            padding: 20px 0;
+        }
+          /* Footer */
+        .footer {
+            background: #4b165e;
+            padding: 35px 0;
+            text-align: center;
+        }
+
+        .footer p {
+            margin: 0;
+            font-size: 14px;
+            color: #ddd;
+        }
+
+
+.footer-link {
+    color: #555;
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+.footer-link:hover {
+    color: #7b5cff;
+}
+
+.separator {
+    color: #ccc;
+}
+
+.social-icon {
+    color: #555;
+    margin: 0 6px;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.social-icon:hover {
+    color: #7b5cff;
+}
+
+.footer hr {
+    margin: 15px 0;
+    opacity: 0.1;
+}
+         .btnt{
+               background: #c98bdc;
+    border: none;
+    border-radius: 25px;
+    font-size: 15px;
+    color: white;
+    padding: 4px 13px;
+        }
+      
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+    <div class="container d-flex justify-content-between align-items-center">
+
+        <!-- Logo -->
+        <a href="index.html" style="    color: white;text-decoration: none;">
+             <h5 class="mb-0 d-flex align-items-center gap-2">
+                 SoulBloom
+                 <img src="./logo-removebg-preview.png" height="30" alt="">
+             </h5>
+         </a>
+
+        <!-- User Dropdown -->
+        <div class="dropdown">
+           <div class="d-flex justify-content-end gap-2">
+               <a style="text-decoration: none;" href="login.html" class="btnt outline">تسجيل الدخول</a>
+                <a style="text-decoration: none;" href="reqster.html" class="btnt filled">مستخدم جديد</a>
+            </div>
+        </div>
+
+    </div>
+</nav>
+
+<div class="container d-flex align-items-center justify-content-center" style="min-height:100vh">
+
+    <div class="login-card text-center">
+
+        <!-- Logo -->
+        <h4 class="fw-bold mb-4">
+            SoulBloom
+            <img src="./logo-removebg-preview.png" height="30" alt="">
+        </h4>
+
+        <form method="post">
+            <!-- Django: {% csrf_token %} -->
+
+            <div class="mb-3 text-end">
+                <label class="form-label">البريد الإلكتروني أو اسم المستخدم</label>
+                <input type="text" class="form-control" placeholder="example@email.com">
+            </div>
+
+            <div class="mb-3 text-end">
+                <label class="form-label">كلمة المرور</label>
+                <input type="password" class="form-control" placeholder="********">
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mb-4 login-links">
+                <a href="#">نسيت كلمة المرور؟</a>
+                <a href="#">إنشاء حساب جديد</a>
+            </div>
+
+            <button type="submit" class="btn btn-login w-100">
+                تسجيل الدخول
+            </button>
+        </form>
+
+    </div>
+
+</div>
+<footer class="footer">
+    <div class="container">
+        <div class="row align-items-center text-center text-md-start">
+
+            <!-- Right side: Pages -->
+            <div class="col-md-6 mb-3 mb-md-0 text-md-end">
+                <a href="about.html" class="footer-link">نبذة عنا</a>
+                <span class="separator">|</span>
+                <a href="faz.html" class="footer-link">الشروط والأحكام</a>
+                <span class="separator">|</span>
+                <a href="sas.html" class="footer-link">سياسة الخصوصية</a>
+            </div>
+
+            <!-- Left side: Social media -->
+            <div class="col-md-6 text-md-start">
+                <span class="me-2">تابعنا على</span>
+
+                <a href="#" class="social-icon facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="social-icon instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="social-icon whatsapp"><i class="bi bi-whatsapp"></i></a>
+                <a href="#" class="social-icon telegram"><i class="bi bi-telegram"></i></a>
+                <a href="#" class="social-icon youtube"><i class="bi bi-youtube"></i></a>
+                <a href="#" class="social-icon tiktok"><i class="bi bi-tiktok"></i></a>
+                <a href="#" class="social-icon snapchat"><i class="bi bi-snapchat"></i></a>
+            </div>
+        </div>
+
+        <hr>
+
+        <p class="text-center mb-0">
+            © 2026 SoulBloom with Mariam — All Rights Reserved
+        </p>
+    </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

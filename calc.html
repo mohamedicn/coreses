@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>تقويم الاستشارات | SoulBloom</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Bootstrap RTL -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --purple: #5d1d6d;
+            --pink: #c98bdc;
+            --dark: #2b0f33;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: "Cairo", sans-serif;
+            background: var(--purple);
+            color: var(--white);
+            padding-bottom: 60px;
+        }
+        
+        /* Navbar */
+        .navbar {
+            padding: 15px 0;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #4b165e;
+            padding: 35px 0;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        
+        .dropdown-menu {
+            background: #c98bdc;
+            border-radius: 12px;
+        }
+        
+        .dropdown-item {
+            color: #fff;
+        }
+        
+        .dropdown-item:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .footer p {
+            margin: 0;
+            font-size: 14px;
+            color: #ddd;
+        }
+
+        /* Calendar Container */
+        .calendar-container {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 25px;
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+        
+        /* Calendar Header */
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .calendar-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--pink);
+        }
+        
+        /* Month Navigation */
+        .month-nav {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .month-nav button {
+            background: var(--pink);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        /* Week Days */
+        .week-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: var(--pink);
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Calendar Grid */
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+        }
+        
+        /* Day Cell */
+        .day-cell {
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 600;
+        }
+        
+        .day-cell:hover {
+            background: rgba(201, 139, 220, 0.2);
+        }
+        
+        .day-cell.other-month {
+            color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .day-cell.selected {
+            background: var(--pink);
+            color: var(--dark);
+        }
+        
+        .day-cell.today {
+            border: 2px solid var(--pink);
+        }
+        
+        /* Time Selection */
+        .time-selection {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 25px;
+            margin-top: 20px;
+        }
+        
+        .time-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--pink);
+            margin-bottom: 20px;
+        }
+        
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 12px;
+        }
+        
+        .time-slot {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 10px;
+            padding: 12px;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .time-slot:hover {
+            background: rgba(201, 139, 220, 0.3);
+        }
+        
+        .time-slot.selected {
+            background: var(--pink);
+            color: var(--dark);
+            font-weight: 700;
+        }
+        
+        .time-slot.booked {
+            background: rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.3);
+            cursor: not-allowed;
+            text-decoration: line-through;
+        }
+        
+        /* Booking Form */
+        .booking-form {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+        
+        .form-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--pink);
+            margin-bottom: 20px;
+        }
+        
+        .form-control {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 10px;
+            padding: 12px 15px;
+        }
+        
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--pink);
+            color: white;
+            box-shadow: 0 0 0 0.25rem rgba(201, 139, 220, 0.25);
+        }
+        
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .form-label {
+            color: var(--pink);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .submit-btn {
+            background: var(--pink);
+            color: var(--dark);
+            border: none;
+            border-radius: 12px;
+            padding: 14px 30px;
+            font-weight: 700;
+            font-size: 16px;
+            width: 100%;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background: #d9a9eb;
+            transform: translateY(-2px);
+        }
+        
+        .submit-btn:disabled {
+            background: rgba(201, 139, 220, 0.5);
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        /* Booking Summary */
+        .booking-summary {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+        
+        .summary-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--pink);
+            margin-bottom: 20px;
+        }
+        
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .summary-item:last-child {
+            border-bottom: none;
+        }
+        
+        .summary-label {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .summary-value {
+            font-weight: 600;
+            color: var(--pink);
+        }
+        
+        /* Steps Indicator */
+        .steps-indicator {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            width: 120px;
+        }
+        
+        .step-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-bottom: 8px;
+            transition: all 0.3s;
+        }
+          /* Footer */
+        .footer {
+            background: #4b165e;
+            padding: 35px 0;
+            text-align: center;
+        }
+
+        .footer p {
+            margin: 0;
+            font-size: 14px;
+            color: #ddd;
+        }
+
+
+.footer-link {
+    color: #555;
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+.footer-link:hover {
+    color: #7b5cff;
+}
+
+.separator {
+    color: #ccc;
+}
+
+.social-icon {
+    color: #555;
+    margin: 0 6px;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.social-icon:hover {
+    color: #7b5cff;
+}
+
+.footer hr {
+    margin: 15px 0;
+    opacity: 0.1;
+}
+        .step.active .step-circle {
+            background: var(--pink);
+            color: var(--dark);
+        }
+        
+        .step-label {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .step.active .step-label {
+            color: var(--pink);
+            font-weight: 600;
+        }
+        
+        .step-line {
+            height: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            position: absolute;
+            top: 20px;
+            left: 60px;
+            right: 60px;
+            z-index: 1;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .calendar-grid {
+                gap: 4px;
+            }
+            
+            .day-cell {
+                height: 45px;
+                font-size: 14px;
+            }
+            
+            .time-slots {
+                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            }
+            
+            .step {
+                width: 90px;
+            }
+            
+            .step-line {
+                left: 45px;
+                right: 45px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="container d-flex justify-content-between align-items-center">
+        <!-- Logo -->
+        <a href="index.html" style="    color: white;text-decoration: none;">
+             <h5 class="mb-0 d-flex align-items-center gap-2">
+                 SoulBloom
+                 <img src="./logo-removebg-preview.png" height="30" alt="">
+             </h5>
+         </a>
+
+        <!-- User Dropdown -->
+        <div class="dropdown">
+            <button class="btn btn-light dropdown-toggle"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                مرحبًا، محمد
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end text-end">
+                <li><a class="dropdown-item" href="#">السلة</a></li>
+                <li><a class="dropdown-item" href="#">الدورات المفضلة</a></li>
+                <li><a class="dropdown-item" href="#">دوراتي</a></li>
+                <li><a class="dropdown-item" href="#">إعدادات الحساب</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item text-danger" href="#">تسجيل الخروج</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<div class="container my-4">
+    <h3 class="text-center mb-4">حجز استشارة مع مريم</h3>
+    
+    <!-- Steps Indicator -->
+    <div class="steps-indicator">
+        <div class="step active">
+            <div class="step-circle">1</div>
+            <div class="step-label">اختيار اليوم</div>
+        </div>
+        <div class="step">
+            <div class="step-circle">2</div>
+            <div class="step-label">اختيار الوقت</div>
+        </div>
+        <div class="step">
+            <div class="step-circle">3</div>
+            <div class="step-label">تفاصيل الحجز</div>
+        </div>
+        <div class="step-line"></div>
+    </div>
+    
+    <div class="row">
+        <!-- Calendar Section -->
+        <div class="col-lg-8">
+            <div class="calendar-container">
+                <div class="calendar-header">
+                    <div class="calendar-title">يناير 2026</div>
+                    <div class="month-nav">
+                        <button id="prevMonth"><</button>
+                        <button id="nextMonth">></button>
+                    </div>
+                </div>
+                
+                <div class="week-days">
+                    <div>السبت</div>
+                    <div>الجمعة</div>
+                    <div>الخميس</div>
+                    <div>الأربعاء</div>
+                    <div>الثلاثاء</div>
+                    <div>الإثنين</div>
+                    <div>الأحد</div>
+                </div>
+                
+                <div class="calendar-grid" id="calendarGrid">
+                    <!-- Days will be generated by JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Time Selection (Hidden by default) -->
+            <div class="time-selection" id="timeSelection" style="display: none;">
+                <div class="time-title">اختر الوقت المناسب:</div>
+                <div class="time-slots" id="timeSlots">
+                    <!-- Time slots will be generated by JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Booking Form (Hidden by default) -->
+            <div class="booking-form" id="bookingForm" style="display: none;">
+                <div class="form-title">تفاصيل الحجز:</div>
+                <form id="consultationForm">
+                    <div class="mb-3">
+                        <label class="form-label">الاسم الكامل:</label>
+                        <input type="text" class="form-control" id="clientName" placeholder="أدخل اسمك الكامل" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">رقم الهاتف للتواصل على واتساب:</label>
+                        <input type="tel" class="form-control" id="whatsappNumber" placeholder="مثال: 0512345678" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">سبب الاستشارة:</label>
+                        <textarea class="form-control" id="consultationReason" rows="4" placeholder="اخبرنا عن سبب رغبتك في الاستشارة" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn" id="submitBooking">تأكيد الحجز</button>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Booking Summary -->
+        <div class="col-lg-4">
+            <div class="booking-summary">
+                <div class="summary-title">ملخص الحجز</div>
+                <div class="summary-item">
+                    <span class="summary-label">التاريخ:</span>
+                    <span class="summary-value" id="summaryDate">لم يتم الاختيار</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">الوقت:</span>
+                    <span class="summary-value" id="summaryTime">لم يتم الاختيار</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">المدة:</span>
+                    <span class="summary-value">60 دقيقة</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">النوع:</span>
+                    <span class="summary-value">استشارة فردية</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">السعر:</span>
+                    <span class="summary-value">250 ريال</span>
+                </div>
+                <hr style="border-color: rgba(255,255,255,0.1); margin: 20px 0;">
+                <div class="summary-item">
+                    <span class="summary-label">الاسم:</span>
+                    <span class="summary-value" id="summaryName">-</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">رقم الواتساب:</span>
+                    <span class="summary-value" id="summaryWhatsApp">-</span>
+                </div>
+            </div>
+            
+            <!-- Instructions -->
+            <div class="booking-summary mt-4">
+                <div class="summary-title">تعليمات الحجز</div>
+                <ul style="padding-right: 20px; color: rgba(255,255,255,0.8); font-size: 14px;">
+                    <li class="mb-2">اختر اليوم المناسب من التقويم</li>
+                    <li class="mb-2">اختر الوقت المناسب من الأوقات المتاحة</li>
+                    <li class="mb-2">املأ بياناتك وسبب الاستشارة</li>
+                    <li class="mb-2">ستصلك رسالة تأكيد على واتساب قبل الموعد بـ 24 ساعة</li>
+                    <li>يمكنك إلغاء الحجز قبل الموعد بـ 48 ساعة</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row align-items-center text-center text-md-start">
+
+            <!-- Right side: Pages -->
+            <div class="col-md-6 mb-3 mb-md-0 text-md-end">
+                <a href="about.html" class="footer-link">نبذة عنا</a>
+                <span class="separator">|</span>
+                <a href="faz.html" class="footer-link">الشروط والأحكام</a>
+                <span class="separator">|</span>
+                <a href="sas.html" class="footer-link">سياسة الخصوصية</a>
+            </div>
+
+            <!-- Left side: Social media -->
+            <div class="col-md-6 text-md-start">
+                <span class="me-2">تابعنا على</span>
+
+                <a href="#" class="social-icon facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="social-icon instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="social-icon whatsapp"><i class="bi bi-whatsapp"></i></a>
+                <a href="#" class="social-icon telegram"><i class="bi bi-telegram"></i></a>
+                <a href="#" class="social-icon youtube"><i class="bi bi-youtube"></i></a>
+                <a href="#" class="social-icon tiktok"><i class="bi bi-tiktok"></i></a>
+                <a href="#" class="social-icon snapchat"><i class="bi bi-snapchat"></i></a>
+            </div>
+        </div>
+
+        <hr>
+
+        <p class="text-center mb-0">
+            © 2026 SoulBloom with Mariam — All Rights Reserved
+        </p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Calendar data
+    let currentDate = new Date(2026, 0, 1); // January 2026
+    let selectedDate = null;
+    let selectedTime = null;
+    
+    // Available times for booking
+    const availableTimes = ["9:00 ص", "11:00 ص", "2:00 م", "5:00 م", "9:00 م"];
+    
+    // Booked times (for simulation)
+    const bookedTimes = {
+        "2026-01-10": ["9:00 ص", "2:00 م"],
+        "2026-01-15": ["11:00 ص", "5:00 م"],
+        "2026-01-20": ["9:00 م"]
+    };
+    
+    // Initialize calendar
+    function initCalendar() {
+        const calendarGrid = document.getElementById('calendarGrid');
+        calendarGrid.innerHTML = '';
+        
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth();
+        
+        // Get first day of month
+        const firstDay = new Date(year, month, 1);
+        // Get last day of month
+        const lastDay = new Date(year, month + 1, 0);
+        // Get day of week for first day (0 = Sunday, 6 = Saturday)
+        let firstDayIndex = firstDay.getDay();
+        // Convert to Arabic week order (0 = Saturday, 6 = Friday)
+        firstDayIndex = (firstDayIndex + 1) % 7;
+        
+        // Previous month days
+        const prevMonthLastDay = new Date(year, month, 0).getDate();
+        
+        // Add previous month days
+        for (let i = firstDayIndex - 1; i >= 0; i--) {
+            const day = document.createElement('div');
+            day.className = 'day-cell other-month';
+            day.textContent = prevMonthLastDay - i;
+            calendarGrid.appendChild(day);
+        }
+        
+        // Current month days
+        const today = new Date();
+        const isCurrentMonth = today.getFullYear() === year && today.getMonth() === month;
+        
+        for (let i = 1; i <= lastDay.getDate(); i++) {
+            const day = document.createElement('div');
+            day.className = 'day-cell';
+            day.textContent = i;
+            day.dataset.date = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+            
+            // Check if today
+            if (isCurrentMonth && i === today.getDate()) {
+                day.classList.add('today');
+            }
+            
+            // Check if selected
+            if (selectedDate && day.dataset.date === selectedDate) {
+                day.classList.add('selected');
+            }
+            
+            // Add click event
+            day.addEventListener('click', () => selectDate(day.dataset.date));
+            
+            calendarGrid.appendChild(day);
+        }
+        
+        // Next month days
+        const totalCells = 42; // 6 weeks * 7 days
+        const nextMonthDays = totalCells - (firstDayIndex + lastDay.getDate());
+        
+        for (let i = 1; i <= nextMonthDays; i++) {
+            const day = document.createElement('div');
+            day.className = 'day-cell other-month';
+            day.textContent = i;
+            calendarGrid.appendChild(day);
+        }
+        
+        // Update month title
+        const monthNames = ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو",
+                           "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"];
+        document.querySelector('.calendar-title').textContent = `${monthNames[month]} ${year}`;
+        
+        // Update steps
+        updateSteps(1);
+    }
+    
+    // Select a date
+    function selectDate(date) {
+        selectedDate = date;
+        initCalendar();
+        
+        // Show time selection
+        document.getElementById('timeSelection').style.display = 'block';
+        document.getElementById('bookingForm').style.display = 'none';
+        
+        // Generate time slots
+        generateTimeSlots();
+        
+        // Update summary
+        const dateObj = new Date(date);
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('summaryDate').textContent = dateObj.toLocaleDateString('ar-SA', options);
+        
+        // Reset time selection
+        selectedTime = null;
+        document.getElementById('summaryTime').textContent = 'لم يتم الاختيار';
+        
+        // Update steps
+        updateSteps(2);
+    }
+    
+    // Generate time slots
+    function generateTimeSlots() {
+        const timeSlotsContainer = document.getElementById('timeSlots');
+        timeSlotsContainer.innerHTML = '';
+        
+        // Get booked times for selected date
+        const dateBookedTimes = bookedTimes[selectedDate] || [];
+        
+        availableTimes.forEach(time => {
+            const timeSlot = document.createElement('button');
+            timeSlot.type = 'button';
+            timeSlot.className = 'time-slot';
+            timeSlot.textContent = time;
+            
+            // Check if booked
+            if (dateBookedTimes.includes(time)) {
+                timeSlot.classList.add('booked');
+                timeSlot.disabled = true;
+            }
+            
+            // Check if selected
+            if (selectedTime === time) {
+                timeSlot.classList.add('selected');
+            }
+            
+            // Add click event if not booked
+            if (!dateBookedTimes.includes(time)) {
+                timeSlot.addEventListener('click', () => selectTime(time));
+            }
+            
+            timeSlotsContainer.appendChild(timeSlot);
+        });
+    }
+    
+    // Select a time
+    function selectTime(time) {
+        selectedTime = time;
+        
+        // Update time slots UI
+        document.querySelectorAll('.time-slot').forEach(slot => {
+            slot.classList.remove('selected');
+            if (slot.textContent === time && !slot.classList.contains('booked')) {
+                slot.classList.add('selected');
+            }
+        });
+        
+        // Show booking form
+        document.getElementById('bookingForm').style.display = 'block';
+        
+        // Update summary
+        document.getElementById('summaryTime').textContent = time;
+        
+        // Update steps
+        updateSteps(3);
+    }
+    
+    // Update steps indicator
+    function updateSteps(activeStep) {
+        document.querySelectorAll('.step').forEach((step, index) => {
+            if (index + 1 <= activeStep) {
+                step.classList.add('active');
+            } else {
+                step.classList.remove('active');
+            }
+        });
+    }
+    
+    // Month navigation
+    document.getElementById('prevMonth').addEventListener('click', () => {
+        currentDate.setMonth(currentDate.getMonth() - 1);
+        initCalendar();
+    });
+    
+    document.getElementById('nextMonth').addEventListener('click', () => {
+        currentDate.setMonth(currentDate.getMonth() + 1);
+        initCalendar();
+    });
+    
+    // Form submission
+    document.getElementById('consultationForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Get form values
+        const name = document.getElementById('clientName').value;
+        const whatsapp = document.getElementById('whatsappNumber').value;
+        const reason = document.getElementById('consultationReason').value;
+        
+        // Update summary
+        document.getElementById('summaryName').textContent = name;
+        document.getElementById('summaryWhatsApp').textContent = whatsapp;
+        
+        // Show success message
+        alert(`تم حجز الاستشارة بنجاح!\n\nالتاريخ: ${selectedDate}\nالوقت: ${selectedTime}\n\nستصلك رسالة تأكيد على واتساب قبل الموعد بـ 24 ساعة.`);
+        
+        // Reset form (in a real app, you would send data to server)
+        this.reset();
+        
+        // Reset selections
+        selectedDate = null;
+        selectedTime = null;
+        document.getElementById('timeSelection').style.display = 'none';
+        document.getElementById('bookingForm').style.display = 'none';
+        document.getElementById('summaryDate').textContent = 'لم يتم الاختيار';
+        document.getElementById('summaryTime').textContent = 'لم يتم الاختيار';
+        document.getElementById('summaryName').textContent = '-';
+        document.getElementById('summaryWhatsApp').textContent = '-';
+        
+        // Reset steps
+        updateSteps(1);
+        initCalendar();
+    });
+    
+    // Initialize the calendar
+    initCalendar();
+</script>
+</body>
+</html>
