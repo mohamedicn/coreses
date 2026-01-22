@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحتي الشخصية</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --purple: #5d1d6d;
+            --mint: #7eb5b2;
+            --pink: #c98bdc;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Cairo", sans-serif;
+        }
+
+        body {
+            background: var(--purple);
+            color: var(--white);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .profile-header {
+            margin-bottom: 30px;
+        }
+
+        .profile-pic {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--mint);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            margin: 0 auto 20px;
+            display: block;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--white);
+            font-weight: 700;
+        }
+
+        .title {
+            color: var(--mint);
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        .about-section {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: right;
+            line-height: 1.8;
+            border-right: 4px solid var(--pink);
+        }
+
+        .about-section h2 {
+            color: var(--pink);
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+            text-align: right;
+        }
+
+        .social-section {
+            margin-top: 30px;
+        }
+
+        .social-section h2 {
+            color: var(--mint);
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+        }
+
+        .social-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 120px;
+            height: 120px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            text-decoration: none;
+            color: var(--white);
+            transition: all 0.3s ease;
+            padding: 15px;
+        }
+
+        .social-link:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-link i {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .social-link span {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* ألوان خاصة بكل منصة */
+        .instagram { border-top: 4px solid #E4405F; }
+        .snapchat { border-top: 4px solid #FFFC00; color: #FFFC00; }
+        .youtube { border-top: 4px solid #FF0000; }
+        .telegram { border-top: 4px solid #26A5E4; }
+        .whatsapp { border-top: 4px solid #25D366; }
+        .tiktok { border-top: 4px solid #000000; }
+
+        .snapchat i { color: #FFFC00; }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .profile-pic {
+                width: 150px;
+                height: 150px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .social-link {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .social-link i {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .social-link {
+                width: 85px;
+                height: 85px;
+            }
+            
+            .social-link i {
+                font-size: 1.8rem;
+            }
+            
+            .social-link span {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="profile-header">
+            <!-- يمكنك استبدال رابط الصورة بصورتك -->
+            <img src="./logo-removebg-preview.png" alt="صورتي الشخصية" class="">
+        </div>
+        
+        <div class="about-section">
+            <h2>نبذة عنّي</h2>
+            <p>أنا مريم، مدرّبة ومعالجة متخصّصة في الشفاء والتطوّر الذاتي.
+                أصمّم الجلسات والدورات من قلب تجربة شخصية عميقة،
+                رحلة بدأت بصدمة غيّرت مسار حياتي منذ أكثر من اثني عشر عامًا،
+                وقادتني إلى إعادة اكتشاف ذاتي،
+                وبناء نسخة جديدة من نفسي وحياتي،
+                أكثر وعيًا، واتزانًا، ورفاهية.
+            </p>
+
+
+            <p style="margin-top: 15px;">ما أقدّمه لكِ ليس مجرّد أدوات أو تقنيات، بل مسار شفاء عشته خطوة بخطوة،
+                وأرافقك فيه بلطف وصدق، لتعود إلى نورك الداخلي،
+                وتخلق حياة تنسجم مع حقيقتك.
+            </p>
+
+
+            <p style="margin-top: 15px;">أؤمن أن داخل كل إنسان نورًا ينتظر أن يُحتضن،
+                    وأن العودة إلى الذات هي أعظم رحلة يمكن أن نخوضها في حياتنا.
+            </p>
+        </div>
+        
+        <div class="social-section">
+            <h2>تواصل معي</h2>
+            <div class="social-links">
+                <a href="https://www.instagram.com/rooh_mariam369?igsh=YXdmemIzanlwa214&utm_source=qr" class="social-link instagram">
+                    <i class="fab fa-instagram"></i>
+                    <span>Instagram</span>
+                </a>
+                
+                <a href="https://snapchat.com/t/7dAaZHVR" class="social-link snapchat">
+                    <i class="fab fa-snapchat"></i>
+                    <span>Snapchat</span>
+                </a>
+                
+                <a href="https://youtube.com/@mariam_rooh?si=7-PCY2XJp__K97je" class="social-link youtube">
+                    <i class="fab fa-youtube"></i>
+                    <span>YouTube</span>
+                </a>
+                
+                <a href="https://t.me/Rooh369M" class="social-link telegram">
+                    <i class="fab fa-telegram"></i>
+                    <span>Telegram</span>
+                </a>
+                
+                <a href="https://api.whatsapp.com/send?phone=971508950344" class="social-link whatsapp">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>WhatsApp</span>
+                </a>
+                
+                <a href="https://www.tiktok.com/@roo7_369?_r=1&_t=ZS-93EvfJYfEyG" class="social-link tiktok">
+                    <i class="fab fa-tiktok"></i>
+                    <span>TikTok</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // إضافة تأثيرات تفاعلية بسيطة
+        document.addEventListener('DOMContentLoaded', function() {
+            const socialLinks = document.querySelectorAll('.social-link');
+            
+            socialLinks.forEach(link => {
+                link.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px)';
+                });
+                
+                link.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+            
+            // إضافة رابطك الشخصي هنا عند الحاجة
+            const links = {
+                instagram: "https://instagram.com/yourusername",
+                snapchat: "https://snapchat.com/add/yourusername",
+                youtube: "https://youtube.com/yourchannel",
+                telegram: "https://t.me/yourusername",
+                whatsapp: "https://wa.me/yourphonenumber",
+                tiktok: "https://tiktok.com/@yourusername"
+            };
+            
+            // تعيين الروابط (يمكنك إلغاء التعليق عند إضافة روابطك)
+            /*
+            document.querySelector('.instagram').href = links.instagram;
+            document.querySelector('.snapchat').href = links.snapchat;
+            document.querySelector('.youtube').href = links.youtube;
+            document.querySelector('.telegram').href = links.telegram;
+            document.querySelector('.whatsapp').href = links.whatsapp;
+            document.querySelector('.tiktok').href = links.tiktok;
+            */
+        });
+    </script>
+</body>
+</html>
